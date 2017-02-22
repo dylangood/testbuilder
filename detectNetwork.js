@@ -26,6 +26,20 @@ var detectNetwork = function(cardNumber) {
   	  return 'American Express';
   	}
   }
+
+  if( cardNumber.length === 13 || cardNumber.length === 16 || cardNumber.length === 19 ) {
+  	if( prefix[0] === '4' ) {
+  		return 'Visa';
+  	}
+  }
+
+  if( cardNumber.length === 16 ) {
+  	if( prefix === '51' || prefix === '52' || prefix === '53' || prefix === '54' || prefix === '55' ) {
+  	  return 'MasterCard';
+  	}
+  }
 };
 
 
+// Visa always has a prefix of 4 and a length of 13, 16, or 19.
+// MasterCard always has a prefix of 51, 52, 53, 54, or 55 and a length of 16.
