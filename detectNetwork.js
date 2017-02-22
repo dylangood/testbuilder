@@ -13,16 +13,16 @@ var detectNetwork = function(cardNumber) {
   // The American Express network always starts with a 34 or 37 and is 15 digits long
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
-  var prefix = cardNumber.slice( 0, 2 );
+  var prefix = cardNumber.slice( 0, 4 );
 
   if( cardNumber.length === 14 ) {
-  	if( prefix === '38' || prefix === '39' ) {
+  	if( prefix[0] === '3' && ( prefix[1] === '8' || prefix[1] === '9' ) ) {
   	  return 'Diner\'s Club';
   	}
   }
 
   if( cardNumber.length === 15 ) {
-  	if( prefix === '34' || prefix === '37' ) {
+  	if( prefix[0] === '3' && ( prefix[1] === '4' || prefix[1] === '7' ) ) {
   	  return 'American Express';
   	}
   }
@@ -34,12 +34,16 @@ var detectNetwork = function(cardNumber) {
   }
 
   if( cardNumber.length === 16 ) {
-  	if( prefix === '51' || prefix === '52' || prefix === '53' || prefix === '54' || prefix === '55' ) {
+  	if( prefix[0] === '5' && ( Number( prefix[1] ) >= 1 && Number( prefix[1] ) <= 5 ) ) {
   	  return 'MasterCard';
   	}
   }
+
+  // if( cardNumber.length === 16 || cardNumber.length === 19 ) {
+  // CONTINUE IMPLEMENTING DISCOVER HERE!!!
+  // }
+
 };
 
-
-// Visa always has a prefix of 4 and a length of 13, 16, or 19.
-// MasterCard always has a prefix of 51, 52, 53, 54, or 55 and a length of 16.
+// Discover always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
+// Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
