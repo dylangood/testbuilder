@@ -213,30 +213,33 @@ describe('Maestro', function() {
   var should = chai.should();
 
   for( i = 12; i < 20; i++ ) {
+    var ending = testDigits20.slice( 4, i );
+    
     it('has a prefix of 5018 and a length of ' + i , function() {
-      detectNetwork('5018' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
-    });
-  }
+      detectNetwork( '5018' + ending ).should.equal('Maestro');
+    });    
 
-  for( i = 12; i < 20; i++ ) {
     it('has a prefix of 5020 and a length of ' + i , function() {
-      detectNetwork('5020' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
-    });
-  }
+      detectNetwork( '5020' + ending ).should.equal('Maestro');
+    });    
 
-  for( i = 12; i < 20; i++ ) {
     it('has a prefix of 5038 and a length of ' + i , function() {
-      detectNetwork('5038' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
-    });
-  }
+      detectNetwork( '5038' + ending ).should.equal('Maestro');
+    });    
 
-  for( i = 12; i < 20; i++ ) {
     it('has a prefix of 6304 and a length of ' + i , function() {
-      detectNetwork('6304' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
+      detectNetwork( '6304' + ending ).should.equal('Maestro');
     });
   }
 
 });
+
+//  for (var prefix = 644; prefix <= 649; prefix++) {
+//    (function(prefix) {
+//      it('has a prefix of ' + prefix + ' and a length of 16');
+//      it('has a prefix of ' + prefix + ' and a length of 19');
+//    })(prefix)
+//  }
 
 describe('should support China UnionPay')
 describe('should support Switch')
