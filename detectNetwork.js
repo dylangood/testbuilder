@@ -39,11 +39,18 @@ var detectNetwork = function(cardNumber) {
   	}
   }
 
-  // if( cardNumber.length === 16 || cardNumber.length === 19 ) {
-  // CONTINUE IMPLEMENTING DISCOVER HERE!!!
-  // }
+  if( cardNumber.length === 16 || cardNumber.length === 19 ) {
+    if( prefix === '6011' || prefix.slice( 0, 2 ) === '65' || 
+    	( Number( prefix.slice( 0, 3 ) ) >= 644 && Number( prefix.slice( 0, 3 ) ) <= 649 )
+      ) {
+      return 'Discover';
+    }
+  }
+
+  if( cardNumber.length >= 12 && cardNumber.length <= 19 ) {
+  	if( prefix === '5018' || prefix === '5020' || prefix === '5038' || prefix === '6304' ) {
+  	  return 'Maestro';
+  	}
+  }
 
 };
-
-// Discover always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
-// Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
