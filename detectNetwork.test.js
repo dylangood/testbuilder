@@ -208,11 +208,34 @@ describe('Discover', function() {
 
 });
 
-// Discover always has a prefix of 6011, 644-649, or 65, and a length of 16 or 19.
-// Maestro always has a prefix of 5018, 5020, 5038, or 6304, and a length of 12-19.
-
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
+  const testDigits20 = '12345678901234567890';
+  var should = chai.should();
+
+  for( i = 12; i < 20; i++ ) {
+    it('has a prefix of 5018 and a length of ' + i , function() {
+      detectNetwork('5018' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+    });
+  }
+
+  for( i = 12; i < 20; i++ ) {
+    it('has a prefix of 5020 and a length of ' + i , function() {
+      detectNetwork('5020' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+    });
+  }
+
+  for( i = 12; i < 20; i++ ) {
+    it('has a prefix of 5038 and a length of ' + i , function() {
+      detectNetwork('5038' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+    });
+  }
+
+  for( i = 12; i < 20; i++ ) {
+    it('has a prefix of 6304 and a length of ' + i , function() {
+      detectNetwork('6304' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+    });
+  }
+
 });
 
 describe('should support China UnionPay')
