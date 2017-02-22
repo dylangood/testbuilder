@@ -214,25 +214,25 @@ describe('Maestro', function() {
 
   for( i = 12; i < 20; i++ ) {
     it('has a prefix of 5018 and a length of ' + i , function() {
-      detectNetwork('5018' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+      detectNetwork('5018' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
     });
   }
 
   for( i = 12; i < 20; i++ ) {
     it('has a prefix of 5020 and a length of ' + i , function() {
-      detectNetwork('5020' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+      detectNetwork('5020' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
     });
   }
 
   for( i = 12; i < 20; i++ ) {
     it('has a prefix of 5038 and a length of ' + i , function() {
-      detectNetwork('5038' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+      detectNetwork('5038' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
     });
   }
 
   for( i = 12; i < 20; i++ ) {
     it('has a prefix of 6304 and a length of ' + i , function() {
-      detectNetwork('6304' + testDigits20.slice( 4, i ) ).should.equal('Maestro');
+      detectNetwork('6304' + testDigits20.slice( 4, i + 1 ) ).should.equal('Maestro');
     });
   }
 
