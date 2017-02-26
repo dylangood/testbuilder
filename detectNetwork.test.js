@@ -106,15 +106,15 @@ describe('MasterCard', function() {
   var expect = chai.expect;
  
   it('has a prefix of 51 and a length of 16', function() {
-    detectNetwork('5112345678901234').should.equal('MasterCard');
+    expect( detectNetwork('5112345678901234') ).to.equal('MasterCard');
   });
  
   it('has a prefix of 52 and a length of 16', function() {
-    detectNetwork('5212345678901234').should.equal('MasterCard');
+    expect( detectNetwork('5212345678901234') ).to.equal('MasterCard');
   });
  
   it('has a prefix of 53 and a length of 16', function() {
-    detectNetwork('5312345678901234').should.equal('MasterCard');
+    expect( detectNetwork('5312345678901234') ).to.equal('MasterCard');
   });
  
 
@@ -125,14 +125,14 @@ describe('MasterCard', function() {
   // and should, but that's just for learning), so once you've gotten 
   // these tests to pass using should syntax, refactor your tests to 
   // use either expect or should, but not both. 
-  var should = chai.should();
-  
+  var expect = chai.expect;
+
   it('has a prefix of 54 and a length of 16', function() {
-    detectNetwork('5412345678901234').should.equal('MasterCard');
+    expect( detectNetwork('5412345678901234') ).to.equal('MasterCard');
   });
  
   it('has a prefix of 55 and a length of 16', function() {
-    detectNetwork('5512345678901234').should.equal('MasterCard');
+    expect( detectNetwork('5512345678901234') ).to.equal('MasterCard');
   })
  
 });
@@ -146,10 +146,10 @@ describe('Discover', function() {
 
   for( i = 0; i < prefixArray.length; i++ ) {
     var prefix = prefixArray[i];
-    var testString16 = prefix + testDigits20.slice( prefix.length , 16 );
-    var testString19 = prefix + testDigits20.slice( prefix.length , 19 );
+    var string16 = prefix + testDigits20.slice( prefix.length , 16 );
+    var string19 = prefix + testDigits20.slice( prefix.length , 19 );
 
-    (function (prefix) {
+    (function (prefix, testString16, testString19) {
 
       it('has a prefix of ' + prefix + ' and a length of 16', function() {
         expect( detectNetwork(testString16) ).to.equal('Discover');
@@ -158,7 +158,7 @@ describe('Discover', function() {
         expect( detectNetwork(testString19) ).to.equal('Discover');
       });
 
-    })(prefix)
+    })(prefix, string16, string19)
   }
 });
 
@@ -169,7 +169,7 @@ describe('Maestro', function() {
   for( i = 12; i < 20; i++ ) {
     var ending = testDigits20.slice( 4, i );
     
-    (function (length) {
+    (function (length, ending) {
 
       it('has a prefix of 5018 and a length of ' + length , function() {
         expect( detectNetwork('5018' + ending) ).to.equal('Maestro');
@@ -185,7 +185,7 @@ describe('Maestro', function() {
       });
 
 
-    })(i)
+    })(i, ending)
   }
 
 });
