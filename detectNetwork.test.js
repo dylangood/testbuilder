@@ -141,18 +141,19 @@ describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
   var should = chai.should();
+  const testDigits20 = '12345678901234567890';
   var prefixArray = [ '6011', '644', '645', '646', '647', '648', '649', '65' ];
 
   for( i = 0; i < prefixArray.length; i++ ) {
     var prefix = prefixArray[i];
-    var testString16 = prefix + '12345678901234567890'.slice( prefixArray[i].length , 16 );
-    var testString19 = prefix + '12345678901234567890'.slice( prefixArray[i].length , 19 );
+    var testString16 = prefix + testDigits20.slice( prefix.length , 16 );
+    var testString19 = prefix + testDigits20.slice( prefix.length , 19 );
       
-    it('has a prefix of ' + prefix + ' and a length of 16' , function() {
+    it('has a prefix of ' + prefix + ' and a length of 16' , function( ) {
       detectNetwork( testString16 ).should.equal('Discover');
     });
 
-    it('has a prefix of ' + prefix + ' and a length of 19' , function() {
+    it('has a prefix of ' + prefix + ' and a length of 19' , function( ) {
       detectNetwork( testString19 ).should.equal('Discover');
     });
   }
@@ -165,19 +166,19 @@ describe('Maestro', function() {
   for( i = 12; i < 20; i++ ) {
     var ending = testDigits20.slice( 4, i );
     
-    it('has a prefix of 5018 and a length of ' + i , function() {
+    it('has a prefix of 5018 and a length of ' + i , function( ) {
       detectNetwork( '5018' + ending ).should.equal('Maestro');
     });    
 
-    it('has a prefix of 5020 and a length of ' + i , function() {
+    it('has a prefix of 5020 and a length of ' + i , function( ) {
       detectNetwork( '5020' + ending ).should.equal('Maestro');
     });    
 
-    it('has a prefix of 5038 and a length of ' + i , function() {
+    it('has a prefix of 5038 and a length of ' + i , function( ) {
       detectNetwork( '5038' + ending ).should.equal('Maestro');
     });    
 
-    it('has a prefix of 6304 and a length of ' + i , function() {
+    it('has a prefix of 6304 and a length of ' + i , function( ) {
       detectNetwork( '6304' + ending ).should.equal('Maestro');
     });
   }
