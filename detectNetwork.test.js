@@ -7,7 +7,7 @@
 // other places in this file where you'll replace the FILL_ME_IN with a
 // different value.
 var FILL_ME_IN = 'Fill this value in';
- 
+
 //describe('Introduction to Mocha Tests - READ ME FIRST', function() {
   // A Mocha test is just a function!
   // If the function throws an error when run, it fails.
@@ -140,47 +140,52 @@ describe('MasterCard', function() {
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  var should = chai.should();
   const testDigits20 = '12345678901234567890';
   var prefixArray = [ '6011', '644', '645', '646', '647', '648', '649', '65' ];
+  var expect = chai.expect;
 
   for( i = 0; i < prefixArray.length; i++ ) {
     var prefix = prefixArray[i];
     var testString16 = prefix + testDigits20.slice( prefix.length , 16 );
     var testString19 = prefix + testDigits20.slice( prefix.length , 19 );
-      
-    it('has a prefix of ' + prefix + ' and a length of 16' , function( ) {
-      detectNetwork( testString16 ).should.equal('Discover');
-    });
 
-    it('has a prefix of ' + prefix + ' and a length of 19' , function( ) {
-      detectNetwork( testString19 ).should.equal('Discover');
-    });
+    (function (prefix) {
+
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        expect( detectNetwork(testString16) ).to.equal('Discover');
+      });
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        expect( detectNetwork(testString19) ).to.equal('Discover');
+      });
+
+    })(prefix)
   }
 });
 
 describe('Maestro', function() {
   const testDigits20 = '12345678901234567890';
-  var should = chai.should();
+  var expect = chai.expect;
 
   for( i = 12; i < 20; i++ ) {
     var ending = testDigits20.slice( 4, i );
     
-    it('has a prefix of 5018 and a length of ' + i , function( ) {
-      detectNetwork( '5018' + ending ).should.equal('Maestro');
-    });    
+    (function (length) {
 
-    it('has a prefix of 5020 and a length of ' + i , function( ) {
-      detectNetwork( '5020' + ending ).should.equal('Maestro');
-    });    
+      it('has a prefix of 5018 and a length of ' + length , function() {
+        expect( detectNetwork('5018' + ending) ).to.equal('Maestro');
+      });
+      it('has a prefix of 5020 and a length of ' + length , function() {
+        expect( detectNetwork('5020' + ending) ).to.equal('Maestro');
+      });
+      it('has a prefix of 5038 and a length of ' + length , function() {
+        expect( detectNetwork('5038' + ending) ).to.equal('Maestro');
+      });
+      it('has a prefix of 6304 and a length of ' + length , function() {
+        expect( detectNetwork('6304' + ending) ).to.equal('Maestro');
+      });
 
-    it('has a prefix of 5038 and a length of ' + i , function( ) {
-      detectNetwork( '5038' + ending ).should.equal('Maestro');
-    });    
 
-    it('has a prefix of 6304 and a length of ' + i , function( ) {
-      detectNetwork( '6304' + ending ).should.equal('Maestro');
-    });
+    })(i)
   }
 
 });
