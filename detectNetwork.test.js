@@ -197,6 +197,7 @@ describe('China UnionPay', function() {
   const testDigits20 = '12345678901234567890';
   const prefixArray = [[622126, 622925], [624, 626], [6282, 6288]];
   const lengthArray = [16, 19];
+  var expect = chai.expect;
 
   for( var i = lengthArray[0]; i <= lengthArray[1]; i++ ) {
     for( var j = 0; j < prefixArray.length; j++ ) {
@@ -223,6 +224,7 @@ describe('Switch', function() {
   const testDigits20 = '12345678901234567890';
   const prefixArray = ['564182', '633110', '6333', '6759', '4903', '4905', '4911', '4936'];
   const lengthArray = [16, 18, 19];
+  var expect = chai.expect;
 
   for( var i = lengthArray[0]; i < lengthArray.length; i++ ) {
     for( var j = 0; j < prefixArray.length; j++ ) {

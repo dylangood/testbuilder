@@ -63,12 +63,12 @@ var detectNetwork = function(cardNumber) {
   	}
   }
 
-  if( cardNumber.length === 16 ||cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19 ) {
+  if( cardNumber.length >= 16 && cardNumber.length <= 19 ) {
     if( ( Number(prefix.slice(0,6)) >= 622126 && Number(prefix.slice(0,6)) <= 622925 ) || 
         ( Number(prefix.slice(0,4)) >= 6282 && Number(prefix.slice(0,4)) <= 6288 ) ||
         ( Number(prefix.slice(0,3)) >= 624 && Number(prefix.slice(0,3)) <= 626 ) 
       ) {
-      return 'Switch';
+      return 'China UnionPay';
     }
   }
 
