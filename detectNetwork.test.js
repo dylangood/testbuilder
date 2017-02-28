@@ -144,7 +144,7 @@ describe('Discover', function() {
   var prefixArray = [ '6011', '644', '645', '646', '647', '648', '649', '65' ];
   var expect = chai.expect;
 
-  for( i = 0; i < prefixArray.length; i++ ) {
+  for( var i = 0; i < prefixArray.length; i++ ) {
     var prefix = prefixArray[i];
     var string16 = prefix + testDigits20.slice( prefix.length , 16 );
     var string19 = prefix + testDigits20.slice( prefix.length , 19 );
@@ -166,7 +166,7 @@ describe('Maestro', function() {
   const testDigits20 = '12345678901234567890';
   var expect = chai.expect;
 
-  for( i = 12; i < 20; i++ ) {
+  for( var i = 12; i < 20; i++ ) {
     var ending = testDigits20.slice( 4, i );
     
     (function (length, ending) {
@@ -190,5 +190,52 @@ describe('Maestro', function() {
 
 });
 
-describe('should support China UnionPay')
-describe('should support Switch')
+// China UnionPay always has a prefix of 622126-622925, 624-626, or 6282-6288 
+// and a length of 16-19.
+
+describe('China UnionPay', function() {
+  const testDigits20 = '12345678901234567890';
+  const prefixArray = [[622126, 622925], [624, 626], [6282, 6288]];
+  const lengthArray = [16, 19];
+
+  for( var i = lengthArray[0]; i <= lengthArray[1]; i++ ) {
+    for( var j = 0; j < prefixArray.length; j++ ) {
+      for( var k = prefixArray[j][0]; k <= prefixArray[j][1]; k += 1 ) {
+        var ending = testDigits20.slice( k.toString().length, i );
+
+        (function (prefix, length, ending) {
+
+          it('has a prefix of ' + prefix + ' and a length of ' + length , function() {
+            expect( detectNetwork(prefix + ending) ).to.equal('China UnionPay');
+          });
+
+        })(k.toString(), i, ending)
+      }
+    }
+  }
+
+});
+
+// Switch always has a prefix of 4903, 4905, 4911, 4936, 564182, 633110, 6333, or 6759 
+// and a length of 16, 18, or 19.
+
+describe('Switch', function() {
+  const testDigits20 = '12345678901234567890';
+  const prefixArray = ['564182', '633110', '6333', '6759', '4903', '4905', '4911', '4936'];
+  const lengthArray = [16, 18, 19];
+
+  for( var i = lengthArray[0]; i < lengthArray.length; i++ ) {
+    for( var j = 0; j < prefixArray.length; j++ ) {
+      var ending = testDigits20.slice( prefix[j].length, lengthArray[i] );
+
+      (function (prefix, length, ending) {
+
+        it('has a prefix of ' + prefix + ' and a length of ' + length , function() {
+          expect( detectNetwork(prefix + ending) ).to.equal('Switch');
+        });
+
+      })(prefixArray[j], lengthArray[i], ending)
+    } 
+  }
+
+});

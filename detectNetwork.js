@@ -13,7 +13,7 @@ var detectNetwork = function(cardNumber) {
   // The American Express network always starts with a 34 or 37 and is 15 digits long
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
-  var prefix = cardNumber.slice( 0, 4 );
+  var prefix = cardNumber.slice( 0, 6 );
 
   if( cardNumber.length === 14 ) {
   	if( prefix[0] === '3' && ( prefix[1] === '8' || prefix[1] === '9' ) ) {
@@ -25,6 +25,15 @@ var detectNetwork = function(cardNumber) {
   	if( prefix[0] === '3' && ( prefix[1] === '4' || prefix[1] === '7' ) ) {
   	  return 'American Express';
   	}
+  }
+
+  if( cardNumber.length === 16 || cardNumber.length === 18 || cardNumber.length === 19 ) {
+    if( prefix === '564182' || prefix === '633110' || prefix.slice(0,4) === '4903' ||
+        prefix.slice(0,4) === '4905' || prefix.slice(0,4) === '4911' || prefix.slice(0,4) === '4936' ||
+        prefix.slice(0,4) === '6333' || prefix.slice(0,4) === '6759' 
+      ) {
+      return 'Switch';
+    }
   }
 
   if( cardNumber.length === 13 || cardNumber.length === 16 || cardNumber.length === 19 ) {
@@ -40,7 +49,7 @@ var detectNetwork = function(cardNumber) {
   }
 
   if( cardNumber.length === 16 || cardNumber.length === 19 ) {
-    if( prefix === '6011' || prefix.slice( 0, 2 ) === '65' || 
+    if( prefix.slice(0,4) === '6011' || prefix.slice( 0, 2 ) === '65' || 
     	( Number( prefix.slice( 0, 3 ) ) >= 644 && Number( prefix.slice( 0, 3 ) ) <= 649 )
       ) {
       return 'Discover';
@@ -48,9 +57,19 @@ var detectNetwork = function(cardNumber) {
   }
 
   if( cardNumber.length >= 12 && cardNumber.length <= 19 ) {
-  	if( prefix === '5018' || prefix === '5020' || prefix === '5038' || prefix === '6304' ) {
+  	if( prefix.slice(0,4) === '5018' || prefix.slice(0,4) === '5020' || 
+        prefix.slice(0,4) === '5038' || prefix.slice(0,4) === '6304' ) {
   	  return 'Maestro';
   	}
+  }
+
+  if( cardNumber.length === 16 ||cardNumber.length === 17 || cardNumber.length === 18 || cardNumber.length === 19 ) {
+    if( ( Number(prefix.slice(0,6)) >= 622126 && Number(prefix.slice(0,6)) <= 622925 ) || 
+        ( Number(prefix.slice(0,4)) >= 6282 && Number(prefix.slice(0,4)) <= 6288 ) ||
+        ( Number(prefix.slice(0,3)) >= 624 && Number(prefix.slice(0,3)) <= 626 ) 
+      ) {
+      return 'Switch';
+    }
   }
 
 };
